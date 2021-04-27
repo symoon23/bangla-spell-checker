@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Bangla Spell Checker</title>
+    {% load bootstrap4 %}
+
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+</head>
+
+<body>
+    <div style="margin-left: 30%; margin-right: 30%; margin-top: 5em">
+        <form method="POST" action="/">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">Query word</label>
+                <input name="query_word" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Query Word" value={{query}}>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div class="float-md-right">
+            {% if result %}
+                {% if result is 'correct' %}
+                    <div class="p-3 mb-2 bg-success text-white">{{query}} is correct!</div>
+                {% else %}
+                    <div class="p-3 mb-2 bg-danger text-white">{{query}} is incorrect!</div>
+                {% endif %}
+            {% else %}
+                <div class="p-3 mb-2 bg-dark text-white">No query is made yet!</div >
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
