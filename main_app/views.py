@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from .spellChecker.main import Main
+from main_app.spellChecker.main import Main
 # Create your views here.
 
 class MainApp(View):
