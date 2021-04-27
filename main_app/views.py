@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.views import View
+from .spellChecker.main import Main
 # Create your views here.
 
 class MainApp(View):
     template_name = 'index.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {'result' : '', 'query': ''})
+        return render(request, self.template_name, {'result': '', 'query_sentence': '', 'answer_list': []})
 
     def post(self, request, *args, **kwargs):
-        query_word = request.POST['query_word']
-        return render(request, self.template_name, {'result': 'correct', 'query': query_word})
+        query_sentence = request.POST['query_sentence']
+        result = Main().getResult(query_sentence)
+        print(query_sentence)
+        return render(request, self.template_name, {'result': 'response', 'query_sentence': query_sentence, 'answer_list': result})

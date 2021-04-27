@@ -17,19 +17,21 @@
         <form method="POST" action="/">
             {% csrf_token %}
             <div class="form-group">
-                <label for="exampleInputEmail1">Query word</label>
-                <input name="query_word" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="Query Word" value={{query}}>
+                <label for="exampleInputEmail1">Query Sentence</label>
+                <input name="query_sentence" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Query Sentence" value="{{query_sentence}}">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Check</button>
         </form>
         <div class="float-md-right">
             {% if result %}
-                {% if result is 'correct' %}
-                    <div class="p-3 mb-2 bg-success text-white">{{query}} is correct!</div>
-                {% else %}
-                    <div class="p-3 mb-2 bg-danger text-white">{{query}} is incorrect!</div>
-                {% endif %}
+                {% for answer in answer_list %}
+                    {% if answer.correct %}
+                        <div class="p-3 mb-2 bg-success text-white">{{answer.query_word}}</div>
+                    {% else %}
+                        <div class="p-3 mb-2 bg-danger text-white">{{answer.query_word}} -> {{answer.correct_word}}</div >
+                    {% endif %}
+                {% endfor %}
             {% else %}
                 <div class="p-3 mb-2 bg-dark text-white">No query is made yet!</div >
             {% endif %}
