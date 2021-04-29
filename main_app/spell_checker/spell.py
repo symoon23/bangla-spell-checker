@@ -1,7 +1,7 @@
 import os
 dictionary = set()
 li = set()
-lis = set()
+lis = list()
 
 
 def read_dictionary_file():
@@ -41,12 +41,12 @@ def suggested_word(word):
             max_s = source_value
             source = so
         final_value = max_s
-        li = ''
+        li = list()
     for sug in contents.splitlines():
         so = sug
         source_value = minimum_distance(so, te)
         if source_value == final_value:
-            li= so
+            li.append(so)
             #lis = lis.union(li)
     return li
     
