@@ -32,3 +32,10 @@ class About(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+
+class Collection(View):
+    template_name = 'wordCollection.html'
+
+    def get(self, request, *args, **kwargs):
+        words = Main().getAllWords()
+        return render(request, self.template_name, {'words': words})

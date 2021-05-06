@@ -50,3 +50,13 @@ class Main:
                     dictionary.write(word+'\n')
         
         return result
+    
+    
+    def getAllWords(self):
+        cur_list = []
+
+        with open(list_path, 'r', encoding="utf-8") as ww:
+            for word in ww:
+                cur_list.append(word.rstrip('\n'))
+        
+        return cur_list
